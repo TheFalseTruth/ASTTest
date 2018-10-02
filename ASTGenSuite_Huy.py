@@ -184,12 +184,12 @@ class ASTGenSuite(unittest.TestCase):
         """Simple program: function with assignstatement with complex exp"""
         input = """function foo(): integer;
          begin 
-            a := a + b * foo(a[]);
+            a := a + b * foo(a[1]);
          end"""
         expect = str(Program([FuncDecl(foo,[],[],[Assign(a, BinaryOp("+",a,
                                                                                  BinaryOp("*", b,
                                                                                           CallExpr(foo,
-                                                                                                   [ArrayCell(a, None)]))))], IntType())]))
+                                                                                                   [ArrayCell(a, i1)]))))], IntType())]))
         self.assertTrue(TestAST.test(input,expect,319))
 
     def test_simple_program_with_function_with_compoundstatement(self):
@@ -928,13 +928,13 @@ class ASTGenSuite(unittest.TestCase):
         """Simple program: function test exp"""
         input = """procedure main(); 
                 begin 
-                    a := foo(foo(a), a[]) + a;
+                    a := foo(foo(a), a[1]) + a;
                 end"""
         expect = str(Program([FuncDecl(main, [], [],
                                        [Assign(a, BinaryOp("+",
                                                            CallExpr(foo,
                                                                     [CallExpr(foo, [a]),
-                                                                     ArrayCell(a, None)]),
+                                                                     ArrayCell(a, i1)]),
                                                            a))], VoidType())]))
         self.assertTrue(TestAST.test(input,expect,383   ))
 
@@ -942,13 +942,13 @@ class ASTGenSuite(unittest.TestCase):
         """Simple program: function test exp"""
         input = """procedure main(); 
                 begin 
-                    a := foo(foo(a), a[]) + a;
+                    a := foo(foo(a), a[1]) + a;
                 end"""
         expect = str(Program([FuncDecl(main, [], [],
                                        [Assign(a, BinaryOp("+",
                                                            CallExpr(foo,
                                                                     [CallExpr(foo, [a]),
-                                                                     ArrayCell(a, None)]),
+                                                                     ArrayCell(a, i1)]),
                                                            a))], VoidType())]))
         self.assertTrue(TestAST.test(input,expect,384   ))
 
