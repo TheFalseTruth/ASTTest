@@ -386,7 +386,6 @@ class ASTGenSuite(unittest.TestCase):
                             if (m <> 1) then swap(a[i],a[m]);
                         end
                     end
-                    return a;
                 """
         expect = str(Program([FuncDecl(Id('foo'),
                     [VarDecl(Id('a'),ArrayType(1,20,IntType()))],
